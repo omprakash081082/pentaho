@@ -1,0 +1,489 @@
+<Schema name="CRMBI44" description="CRMBI44">
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date">
+    <Hierarchy visible="true" hasAll="true" primaryKey="DATE_ID">
+      <Table name="D_DATE">
+      </Table>
+      <Level name="Years" visible="true" column="YEAR_NUMBER" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+        <Annotations>
+          <Annotation name="AnalyzerDateFormat">
+            <![CDATA[[yyyy]]]>
+          </Annotation>
+        </Annotations>
+      </Level>
+      <Level name="Quarters" visible="true" column="QUARTER_NAME" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
+        <Annotations>
+          <Annotation name="AnalyzerDateFormat">
+            <![CDATA[[yyyy].['Q'q]]]>
+          </Annotation>
+        </Annotations>
+      </Level>
+      <Level name="Months" visible="true" column="MONTH_NAME" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+        <Annotations>
+          <Annotation name="AnalyzerDateFormat">
+            <![CDATA[[yyyy].['Q'q].[MMM]]]>
+          </Annotation>
+        </Annotations>
+      </Level>
+      <Level name="Week" visible="true" column="WEEK_OF_MONTH_NUMBER" type="Integer" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never" caption="Week">
+        <Annotations>
+          <Annotation name="AnalyzerDateFormat">
+            <![CDATA[[yyyy].['Q'q].[MMM].[w]]]>
+          </Annotation>
+        </Annotations>
+      </Level>
+      <Level name="Date" visible="true" column="DAY_DATE" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        <Annotations>
+          <Annotation name="AnalyzerDateFormat">
+            <![CDATA[[yyyy].['Q'q].[MMM].[w].[yyyy-MM-dd]]]>
+          </Annotation>
+        </Annotations>
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Country">
+    <Hierarchy visible="true" hasAll="true" primaryKey="COUNTRYID">
+      <Table name="D_COUNTRY">
+      </Table>
+      <Level name="CountryId" visible="true" table="D_COUNTRY" column="COUNTRYID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="CountryName" visible="true" table="D_COUNTRY" column="COUNTRYDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Product">
+    <Hierarchy visible="true" hasAll="true" allMemberName="All Products" primaryKey="PRODID" primaryKeyTable="D_PRODUCT">
+      <Table name="D_PRODUCT">
+      </Table>
+      <Level name="ProductId" visible="true" table="D_PRODUCT" column="PRODID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="ProductName" visible="true" table="D_PRODUCT" column="PRODDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Users">
+    <Hierarchy visible="true" hasAll="true" primaryKey="USERID">
+      <Table name="D_USERS">
+      </Table>
+      <Level name="UserId" visible="true" table="D_USERS" column="USERID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="UserName" visible="true" table="D_USERS" column="USERNAME" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="SubTeamId" visible="true" table="D_USERS" column="SUBTEAMID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="SubTeamName" visible="true" table="D_USERS" column="SUBTEAMDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="TeamId" visible="true" table="D_USERS" column="TEAMID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="TeamName" visible="true" table="D_USERS" column="TEAMDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="EmployeeCode" visible="true" column="EMPLOYEECODE" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Employee Code">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Teams">
+    <Hierarchy visible="true" hasAll="true" allMemberName="All Teams" primaryKey="TEAMID">
+      <Table name="D_TEAMS">
+      </Table>
+      <Level name="TeamId" visible="true" column="TEAMID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Team ID">
+      </Level>
+      <Level name="TeamName" visible="true" column="TEAMDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Team Name">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="SubTeams">
+    <Hierarchy visible="true" hasAll="true" allMemberName="All Subteams" primaryKey="SUBTEAMID">
+      <Table name="D_SUBTEAMS">
+      </Table>
+      <Level name="SubTeamId" visible="true" column="SUBTEAMID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="SubTeamName" visible="true" column="SUBTEAMDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Sub Team Name">
+      </Level>
+      <Level name="TeamId" visible="true" table="D_SUBTEAMS" column="TEAMID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="MissedCallsDid">
+    <Hierarchy visible="true" hasAll="true" primaryKey="DID">
+      <Table name="D_MISSED_CALLS_DID">
+      </Table>
+      <Level name="DId" visible="true" table="D_MISSED_CALLS_DID" column="DID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="ProductId" visible="true" table="D_MISSED_CALLS_DID" column="PRODID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="TeamId" visible="true" table="D_MISSED_CALLS_DID" column="TEAMID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Lang" visible="true" table="D_MISSED_CALLS_DID" column="LANG" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Campaign" visible="true" table="D_MISSED_CALLS_DID" column="CAMPAIGN" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="PaymentOptions">
+    <Hierarchy visible="true" hasAll="true" primaryKey="MODEID">
+      <Table name="D_PAYMENTOPTIONS">
+      </Table>
+      <Level name="ModeId" visible="true" table="D_PAYMENTOPTIONS" column="MODEID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="ModeType" visible="true" table="D_PAYMENTOPTIONS" column="MODEDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Disposition">
+    <Hierarchy name="default" visible="false" hasAll="true" primaryKey="LOOKID">
+      <Table name="D_DISPOSITION">
+      </Table>
+      <Level name="DispositionType" visible="true" table="D_DISPOSITION" column="LINEDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Language">
+    <Hierarchy visible="true" hasAll="true" primaryKey="LANGID">
+      <Table name="D_LANGUAGE">
+      </Table>
+      <Level name="LangId" visible="true" table="D_LANGUAGE" column="LANGID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="LanguageName" visible="true" table="D_LANGUAGE" column="LANGUAGE" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="OrderSource">
+    <Hierarchy visible="true" hasAll="true" primaryKey="ORDER_SOURCE_ID">
+      <Table name="D_ORDER_SOURCE">
+      </Table>
+      <Level name="OrderSource" visible="true" column="ORDERSOURCE" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="OrderSourceId" visible="true" column="ORDER_SOURCE_ID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="OrderSourceType" visible="true" column="ORDER_SOURCE_DESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="OrderStatus">
+    <Hierarchy visible="true" hasAll="true" primaryKey="ORDERSTATUS">
+      <Table name="D_ORDER_STATUS">
+      </Table>
+      <Level name="OrderStatus" visible="true" column="ORDERSTATUS" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="OrderStatusId" visible="true" column="ORDERSTATUS_ID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="OrderStatusType" visible="true" table="D_ORDER_STATUS" column="ORDER_STATUS_DESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="PayMode">
+    <Hierarchy visible="true" hasAll="true" primaryKey="PAYMODEID">
+      <Table name="D_PAYMODE">
+      </Table>
+      <Level name="PayModeType" visible="true" table="D_PAYMODE" column="PAYMODEDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="PayModeId" visible="true" table="D_PAYMODE" column="PAYMODEID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="ShowRooms">
+    <Hierarchy visible="true" hasAll="true" primaryKey="SHOWID">
+      <Table name="D_SHOWROOMS">
+      </Table>
+      <Level name="ShowRoomID" visible="true" table="D_SHOWROOMS" column="SHOWID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="ShowRoom" visible="true" column="SHOWDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Show Room">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="TeamLink">
+    <Hierarchy visible="true" hasAll="true" primaryKey="LINEID">
+      <Table name="D_TEAMLINK">
+      </Table>
+      <Level name="UserId" visible="true" table="D_TEAMLINK" column="USERID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="TeamId" visible="true" table="D_TEAMLINK" column="TEAMID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="TeamDSGId" visible="true" table="D_TEAMLINK" column="TEAMDSGID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="SubTeamId" visible="true" table="D_TEAMLINK" column="SUBTEAMID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="LineId" visible="true" table="D_TEAMLINK" column="LINEID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Complaints">
+    <Hierarchy visible="true" hasAll="true" primaryKey="LINEID">
+      <Table name="D_COMPLAINTS">
+      </Table>
+      <Level name="ComplainType" visible="true" table="D_COMPLAINTS" column="LINEDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Status" visible="true" table="D_COMPLAINTS" column="STATUS" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Time">
+    <Hierarchy visible="true" hasAll="true" primaryKey="time_hour">
+      <Table name="D_Time_Hour">
+      </Table>
+      <Level name="Hour" visible="true" column="time_hour" ordinalColumn="ordinal_pos" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="TimeInterval" caption="Time Interval" description="Time Interval">
+    <Hierarchy visible="true" hasAll="true" primaryKey="hour_interval">
+      <Table name="D_Time_Interval">
+      </Table>
+      <Level name="Interval" visible="true" column="hour_interval" ordinalColumn="ordinal_pos" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Hour Interval">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="State">
+    <Hierarchy name="default" visible="true" hasAll="true" primaryKey="stateid">
+      <Table name="D_STATE">
+      </Table>
+      <Level name="State" visible="true" column="statedesc" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="State">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="CALLSOURCE">
+    <Hierarchy visible="true" hasAll="true" allMemberName="All Callsource" primaryKey="CALLSOURCE">
+      <Table name="D_CALLSOURCE">
+      </Table>
+      <Level name="callsourcedesc" visible="true" column="CALLSOURCEDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Dialer">
+    <Hierarchy visible="true" hasAll="true" allMemberName="All Dialer" primaryKey="DIALERID">
+      <Table name="D_DIALER">
+      </Table>
+      <Level name="DialerId" visible="true" column="DIALERID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="DialerID">
+      </Level>
+      <Level name="Dialeriddesc" visible="true" column="DIALERIDDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Dialer IDdesc">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="CallsType">
+    <Hierarchy visible="true" hasAll="true" allMemberName="All Calls" primaryKey="CALLTYPEID">
+      <Table name="D_CALLSTYPE">
+      </Table>
+      <Level name="CallTypeid" visible="true" column="CALLTYPEID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Calls Type ID">
+      </Level>
+      <Level name="CallTypedesc" visible="true" column="CALLTYPEDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Calls Type">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="ONHOLDREASON">
+    <Hierarchy visible="true" hasAll="true" allMemberName="All Reason" primaryKey="ONHOLDREASONID" primaryKeyTable="D_ONHOLDREASON">
+      <Table name="D_ONHOLDREASON">
+      </Table>
+      <Level name="OnholdReasonDesc" visible="true" column="ONHOLDREASONDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="On Hold Reason">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="OPSManager">
+    <Hierarchy visible="true" hasAll="true" primaryKey="OPSID" primaryKeyTable="D_OPSMANAGER">
+      <Table name="D_OPSMANAGER">
+      </Table>
+      <Level name="OPSID" visible="true" table="D_OPSMANAGER" column="OPSID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="OPS ID">
+      </Level>
+      <Level name="OPSDesc" visible="true" table="D_OPSMANAGER" column="OPSDESC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="OPS Desc">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="AgentTarget" visible="true" cache="true" enabled="true">
+    <Table name="F_AGENT_TARGET">
+    </Table>
+    <DimensionUsage source="Date" name="Date" visible="true" foreignKey="CREATED_DATE_ID_UPDATED" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Time" name="Time" visible="true" foreignKey="CREATED_DATE_TIME" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Users" name="Users" visible="true" foreignKey="AGENTID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Teams" name="Teams" visible="true" foreignKey="TEAMID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="SubTeams" name="SubTeams" visible="true" foreignKey="SUBTEAMID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="TimeInterval" name="TimeInterval" visible="true" foreignKey="time_span" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="AgentTarget" column="AGENTTARGET" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="TeamTarget" column="TEAM_TARGET" aggregator="max" caption="Team Target" visible="true">
+    </Measure>
+    <Measure name="SubTeamTarget" column="SUBTEAM_TARGET" aggregator="max" caption="Sub Team Target" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="OrderLines" caption="Sales" visible="true" cache="true" enabled="true">
+    <Table name="F_ORDERLINES_VIEW">
+    </Table>
+    <DimensionUsage source="Date" name="Date" visible="true" foreignKey="ORDER_DATE_ID_UPDATED" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Product" name="Product" visible="true" foreignKey="PRODID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Users" name="Users" caption="Agent" visible="true" foreignKey="USERID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Teams" name="Teams" caption="Team" visible="true" foreignKey="TEAMID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="SubTeams" name="SubTeams" caption="Sub Team" visible="true" foreignKey="SUBTEAMID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="OrderStatus" name="OrderStatus" caption="Order Status" visible="true" foreignKey="ORDERSTATUS" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Time" name="Time" caption="Hour" visible="true" foreignKey="ORDER_DATE_TIME" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="TimeInterval" name="TimeInterval" caption="Hour Interval" visible="true" foreignKey="time_span" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="ONHOLDREASON" name="ONHOLDREASON" caption="On Hold" visible="true" foreignKey="ONHOLDREASONID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="CallsType" name="CallsType" caption="Calls Type" visible="true" foreignKey="CALLSTYPE" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Language" name="Language" caption="Language" visible="true" foreignKey="LANGID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="OPSManager" name="OPSManager" caption="OPS Manager" visible="true" foreignKey="OPSID" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="GrossSale" column="GROSS" formatString="#,###.00" aggregator="sum" caption="Gross Sale" visible="true">
+    </Measure>
+    <Measure name="NettSale" column="NETT" formatString="#,###.00" aggregator="sum" caption="Nett Sale" visible="true">
+    </Measure>
+    <Measure name="Achieved" column="NETT" formatString="#,###.00" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="AvgSalePrice" column="nett" formatString="#,###.00" aggregator="avg" caption="Avg. Sale Price" visible="true">
+    </Measure>
+    <Measure name="CnfUpSell" column="upsellvalue" formatString="#,###.00" aggregator="sum" caption="Confirmation Upsell Value" visible="true">
+    </Measure>
+    <Measure name="AgentUpSell" column="agentupsellvalue" formatString="#,###.00" aggregator="sum" caption="Agent Upsell Value" visible="true">
+    </Measure>
+    <Measure name="CnfUpSellQnty" column="CNFUPSELLQNTY" formatString="#,###.00" aggregator="sum" caption="Confirmation Upsell Quantity" visible="true">
+    </Measure>
+    <Measure name="AgentUpSellQnty" column="AGENTUPSELLQNTY" formatString="#,###.00" aggregator="sum" caption="Agent Upsell Quantity" visible="true">
+    </Measure>
+    <Measure name="Quantity" column="QNTY" formatString="#,###.00" aggregator="sum" caption="Quantity" visible="true">
+    </Measure>
+    <Measure name="AmcValue" column="AMCVALUE" formatString="#,###.00" aggregator="sum" caption="Amc Value" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="CallRecords" caption="Calls" visible="true" cache="true" enabled="true">
+    <Table name="F_CALLRECORD_LINES">
+    </Table>
+    <DimensionUsage source="Date" name="Date" visible="true" foreignKey="CALLSTARTTIME_DATE_ID_UPDATED" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Time" name="Time" caption="Hour" visible="true" foreignKey="CALLSTART_DATE_TIME" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Product" name="Product" caption="Product" visible="true" foreignKey="PRODID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Users" name="Users" caption="Agent" visible="true" foreignKey="USERID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Teams" name="Teams" caption="Team" visible="true" foreignKey="TEAMID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="SubTeams" name="SubTeam" caption="Sub Team" visible="true" foreignKey="SUBTEAMID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="TimeInterval" name="TimeInterval" caption="Hour Interval" visible="true" foreignKey="time_span" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="CALLSOURCE" name="CALLSOURCE" caption="Call Source" visible="true" foreignKey="CALLSOURCE" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Disposition" name="Disposition" caption="Disposition" visible="true" foreignKey="DISPID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Language" name="Language" caption="Language" visible="true" foreignKey="LANGID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Dialer" name="Dialer" visible="true" foreignKey="DIALERID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="CallsType" name="CallsType" visible="true" foreignKey="CALLTYPEID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="OPSManager" name="OPSManager" caption="OPS Manager" visible="true" foreignKey="OPSID" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="Duration" column="DURATION" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="CallsMade" column="callcount" aggregator="sum" caption="Total Calls " visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="MissedCalls" caption="Fresh Leads" visible="true" cache="true" enabled="true">
+    <Table name="F_MISSED_CALLS">
+    </Table>
+    <DimensionUsage source="Date" name="Date" visible="true" foreignKey="RECIVEDTIME_DATE_ID_UPDATED" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Time" name="Time" caption="Time" visible="true" foreignKey="RECIVEDTIME_DATE_TIME" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Product" name="Product" visible="true" foreignKey="PRODID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Teams" name="Teams" visible="true" foreignKey="TEAMID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="TimeInterval" name="TimeInterval" caption="Hour Interval" visible="true" foreignKey="time_span" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="OPSManager" name="OPSManager" caption="OPS Manager" visible="true" foreignKey="OPSID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Language" name="Language" caption="Language" visible="true" foreignKey="LANGID">
+    </DimensionUsage>
+    <DimensionUsage source="Disposition" name="Disposition" caption="Disposition" visible="true" foreignKey="DISPID">
+    </DimensionUsage>
+    <Measure name="CallCount" column="LEADCOUNT" aggregator="sum" caption="Fresh Leads" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="TeamTarget" visible="true" cache="true" enabled="true">
+    <Table name="F_TEAM_TARGET">
+    </Table>
+    <DimensionUsage source="Date" name="Date" visible="true" foreignKey="CREATED_DATE_ID_UPADTED" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Time" name="Time" visible="true" foreignKey="CREATED_DATE_TIME" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Teams" name="Teams" visible="true" foreignKey="TEAMID" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="TimeInterval" name="TimeInterval" caption="Hour interval" visible="true" foreignKey="time_span" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="TeamTarget" column="TEAMTARGET" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="SubTeamTarget" caption="Sub Team Target" visible="true" cache="true" enabled="true">
+    <Table name="F_SUBTEAM_TARGET">
+    </Table>
+    <DimensionUsage source="SubTeams" name="SubTeams" caption="Sub Teams" visible="true" foreignKey="SubTeamId" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Date" name="Date" caption="Date" visible="true" foreignKey="PERIODFROM_DATE_ID_UPDATED" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Time" name="Time" visible="true" foreignKey="PERIODFROM_DATE_TIME" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="TimeInterval" name="TimeInterval" caption="Hour Interval" visible="true" foreignKey="time_span" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="SubTeamTarget" column="TARGETVALUE" aggregator="sum" caption="Sub Team Target" visible="true">
+    </Measure>
+  </Cube>
+  <VirtualCube enabled="true" name="LeadsVsSales" caption="Leads Vs Sales" visible="true">
+    <VirtualCubeDimension cubeName="OrderLines" caption="Date" visible="true" highCardinality="false" name="Date">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="MissedCalls" caption="Time" visible="true" highCardinality="false" name="Time">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="AgentTarget" caption="Teams" visible="true" highCardinality="false" name="Teams">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="MissedCalls" caption="Product" visible="true" highCardinality="false" name="Product">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="AgentTarget" visible="true" highCardinality="false" name="Users">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="OrderLines" caption="SubTeams" visible="true" highCardinality="false" name="SubTeams">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="OrderLines" caption="Time Interval" visible="true" highCardinality="false" name="TimeInterval">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="CallRecords" caption="CallsType" visible="true" highCardinality="false" name="CallsType">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="OrderLines" caption="Order Status" visible="true" highCardinality="false" name="OrderStatus">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="OrderLines" caption="Language" visible="true" highCardinality="false" name="Language">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="OrderLines" caption="OPSManager" visible="true" highCardinality="false" name="OPSManager">
+    </VirtualCubeDimension>
+    <VirtualCubeMeasure cubeName="CallRecords" name="[Measures].[CallsMade]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="OrderLines" name="[Measures].[Achieved]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="OrderLines" name="[Measures].[NettSale]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="MissedCalls" name="[Measures].[CallCount]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="OrderLines" name="[Measures].[GrossSale]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="OrderLines" name="[Measures].[CnfUpSell]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="OrderLines" name="[Measures].[AgentUpSell]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="OrderLines" name="[Measures].[CnfUpSellQnty]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="OrderLines" name="[Measures].[AgentUpSellQnty]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="OrderLines" name="[Measures].[Quantity]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="OrderLines" name="[Measures].[AmcValue]" visible="true">
+    </VirtualCubeMeasure>
+  </VirtualCube>
+</Schema>
